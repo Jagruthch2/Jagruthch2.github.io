@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment-5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Assignment-5</h1>
+    <input id="box1" placeholder="Name">
+    <br>
+    <input id="box2" placeholder="Rollno">
+    <br>
+    <input id="box3" placeholder="Phoneno">
+    <br>
+    <button id="submit" onclick="submit()">Submit</button>
+    <hr>
+    <div id="result"></div>
+    <script>
+        function submit(){
+            result.innerHTML=box1.value+", "+ box2.value+", "+box3.value ;
+        }
+    </script>
+    
+</body>
+</html>
