@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment-4</title>
+</head>
+<body>
+    <h1>ASSIGNMENT 4</h1>
+    <script>
+        function calc(){
+            let num1=Number(box1.value);
+            let num2=Number(box2.value);
+            add(num1,num2);
+            subtract(num1,num2);
+            multiply(num1,num2);
+            divide(num1,num2);
+        }
+        function add(a,b){
+            document.writeln("Sum: ",a+b);
+            document.write("<br>");
+        }
+        function subtract(a,b){
+            document.writeln("Subtraction: ",a-b);
+            document.write("<br>");
+
+        }
+        function multiply(a,b){
+            document.writeln("Multplication: ",a*b);
+            document.write("<br>");
+
+        }
+        function divide(a,b){
+            document.writeln("Division: ",a/b);
+            document.write("<br>");
+        }
+
+    </script>
+    <input id="box1" type="number">
+    <input id="box2" type="number">
+    <button onclick="calc()" style="background-color:red">Click</button>
+</body>
+</html>
