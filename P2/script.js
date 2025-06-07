@@ -22,7 +22,7 @@ const showRegister = () => {
     <p><input type="password" id="txtPass"></p>
     <button onclick='addUser()'>Register</button>
     <hr>
-    <button onClick='showLogin()'>Alread a Member? Login here...</button>
+    <button onClick='showLogin()'>Already a Member? Login here...</button>
     `;
   root.innerHTML = str;
 };
@@ -31,19 +31,25 @@ const showHome = () => {
   let str = `
     <h1>Welcome ${user.name}</h1>
     <hr>
-    <p><select>
+    <p><select id="options">
      <option value=0>--select--</option>
       <option value=1>Deposit</option>
       <option value=2>Withdraw</option>
+      <option value=3>Fund Transfer</option>
       </select></p>
       <p>
       <input type='number' id='txtAmount'>
       </p>
-      <p><button>Submit</button>
+      <p><button onClick="process(user)">Submit</button>
 
     <button onclick='showLogin()'>Logout</button>
+    <div id="processMessage" style="color:red"></div>
     <hr>
-    <p>Current balance:${user.balance}
+    <div id="balance">
+      <p>Current balance:${user.balance};
+    </div>
+    <hr>
+    <div id="transfer"></div>
     `;
   root.innerHTML = str;
 };
@@ -71,3 +77,40 @@ const validateUser = () => {
     dvMsg.innerHTML = "Access Denied";
   }
 };
+
+const process=(user)=>{
+  let element=document.getElementById("options");
+  let value=element.value;
+  let text=document.getElementById("processMessage");
+  let amount=Number(document.getElementById("txtAmount").value);
+  let balance=document.getElementById("balance");
+  if(value==0){
+    text.innerHTML=`Please select the appropriate option ${user.name}`;
+  }else if(value==1){
+    user.balance=Number(user.balance)+amount;
+    text.innerHTML=`Transaction Succesful`;
+    balance.innerHTML=`<p>Current Balance = ${user.balance}</p>`;
+
+  }else if(value==2){
+    if(user.balance>=amount){
+      user.balance=user.balance-amount;
+      balance.innerHTML=`<p>Current Balance = ${user.balance}</p>`;
+    }else{
+      text.innerHTML=`Insufficient Funds`;
+    }
+  }else if(value==3){
+    let count=1;
+    let str=`
+    <h1>Fund Transfer</h1>
+    <p><select id="otherusers">
+      <option value=0>--select--</option>
+      ${users.map((otheruser)=>{
+        if(otheruser!=user){
+          `<option value=${count++}>${otheruser.name}</option>`
+        }
+      })}
+    </select></p>`
+    let transferdiv=document.getElementById("transfer");
+    transferdiv.innerHTML=str;
+  }
+}

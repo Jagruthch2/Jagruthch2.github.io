@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="inputVal" placeholder="Enter the email ">
+    <button onclick="searchUser()">Search</button>
+    <div id="dvUsers"></div>
+    <script>
+        function searchUser(){
+            let mail=document.getElementById("inputVal").value;
+            const url = "https://jsonplaceholder.typicode.com/users";
+            let str = "<div>";
+            fetch(url)
+              .then((res) => res.json())
+              .then((users) => {
+                // users.map((user) => {
+                //     if(user.email===mail){
+                //         str += `
+                //         <div>name: ${user.name}</div>
+                //         <div>username: ${user.username}</div>
+                //         <div>email: ${user.email}</div>
+                //         <div>city: ${user.address.city}</div>
+                //         `;
+                //     }
+                // });
+                let result = users.find((user)=>user.email===mail)
+                str+=`
+                <div>Name: ${result.name}</div>
+                <div>Username: ${result.username}</div>
+                <div>Email: ${result.email}</div>
+                <div>City: ${result.address.city}</div>
+                `
+                dvUsers.innerHTML = str + "</div>";
+              });
+        }
+    </script>
+  </body>
+</html>
