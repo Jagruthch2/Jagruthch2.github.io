@@ -1,0 +1,21 @@
+.App-Header-Row{
+    display:flex;
+    justify-content:space-between;
+    background-color:orange;
+}
+
+.App-Header-Row div{
+    padding: 10px;
+}
+.App-Header-Row li{
+    display:inline-block;
+    padding-right:30px;
+    transition: font-size 0.3s ease;
+}
+.App-Header-Row li:hover{
+    font-size:1.2em;
+}
+.App-Header-Row li a{
+    color:white;
+    text-decoration:none;
+}
