@@ -100,17 +100,41 @@ const process=(user)=>{
     }
   }else if(value==3){
     let count=1;
-    let str=`
+    let str="<div>"
+    str+=`
     <h1>Fund Transfer</h1>
     <p><select id="otherusers">
-      <option value=0>--select--</option>
-      ${users.map((otheruser)=>{
+    <option value=0>--select--</option>`
+    users.map((otheruser)=>{
         if(otheruser!=user){
-          `<option value=${count++}>${otheruser.name}</option>`
+          str+=`<option value=${count++}>${otheruser.name}</option>`
         }
-      })}
-    </select></p>`
+      })
+    let otherUser=document.getElementById("otherusers");  
+    str+="</select></p><button onClick='fundTransfer(user,otherUser,amount)'>Submit</button></div>"
     let transferdiv=document.getElementById("transfer");
     transferdiv.innerHTML=str;
   }
+}  
+function fundTransfer() {
+    let selectedIndex = document.getElementById("otherusers").value;
+    let amount = Number(document.getElementById("txtAmount").value);
+    let text = document.getElementById("processMessage");
+    let balance = document.getElementById("balance");
+
+    if (selectedIndex == "-1") {
+        text.innerHTML = "Please select a user to transfer funds";
+        return;
+    }
+
+    let otherUser = users[selectedIndex];
+
+    if (user.balance >= amount) {
+        user.balance -= amount;
+        otherUser.balance += amount;
+        balance.innerHTML = `<p>Current Balance = ${user.balance}</p>`;
+        text.innerHTML = `Fund Transfer Successful to ${otherUser.name}`;
+    } else {
+        text.innerHTML = "Insufficient Funds for Transfer";
+    }
 }
